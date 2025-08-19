@@ -10,7 +10,6 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
   }
 
-  //const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
     city
   )}&appid=${apiKey}`;
@@ -21,13 +20,20 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "OpenWeather API error" }, { status: res.status });
     }
     const data = await res.json();
+    const tempCelsius = (data.main.temp - 273.15).toFixed(1);
     // Only send the fields you need
-    return NextResponse.json({
+   return NextResponse.json({
       name: data.name,
+      country: data.sys.country, // country code
+      temperature: tempCelsius,  // °C
       weather: data.weather.map((w: any) => ({
         main: w.main,
         description: w.description,
       })),
+      wind: {
+        speed: data.wind?.speed || 0,
+        deg: data.wind?.deg || 0,
+      },
     });
   } catch (error) {
     return NextResponse.json({ error: "Fetch failed" }, { status: 500 });

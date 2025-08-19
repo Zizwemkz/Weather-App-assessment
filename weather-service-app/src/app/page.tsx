@@ -5,7 +5,10 @@ import styles from "./Weather.module.css";
 
 type WeatherResponse = {
   name: string;
+  country: string;
+  temperature: string; // °C
   weather: { main: string; description: string }[];
+  wind: { speed: number; deg: number };
 };
 
 // Hardcoded countries and cities
@@ -68,8 +71,6 @@ export default function WeatherPage() {
 
       <h2>Weather Information</h2>
 
-    
-
       <form onSubmit={handleSubmit} className={styles.form}>
   
       {/* Toggle search mode */}
@@ -124,7 +125,7 @@ export default function WeatherPage() {
             )}
           </>
         ) : (
-          // Manual search (textbox)
+          // search (textbox)
           <input
             value={city}
             onChange={(e) => setCity(e.target.value)}
@@ -152,13 +153,19 @@ export default function WeatherPage() {
       {weather && (
         <div className={styles.weather}>
           <p>
-            <strong>City:</strong> {weather.name}
+            <strong>City:</strong> {weather.name}, {weather.country}
           </p>
           <p>
             <strong>Main:</strong> {weather.weather[0].main}
           </p>
           <p>
             <strong>Description:</strong> {weather.weather[0].description}
+          </p>
+          <p>
+            <strong>Temperature:</strong> <span className={styles.temp}> {weather.temperature} °C</span>
+          </p>
+          <p>
+            <strong>Wind:</strong> {weather.wind.speed} m/s at {weather.wind.deg}°
           </p>
         </div>
       )}
