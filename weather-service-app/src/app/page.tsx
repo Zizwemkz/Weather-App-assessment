@@ -147,7 +147,7 @@ export default function WeatherPage() {
           Get Weather
         </button>
       </form>
-
+      <div className="small mt-2">Tip: Try "Cape Town", "Johannesburg", or "London".</div>
       {error && <div className={styles.error}>Error: {error}</div>}
       {loading && <p>Loading...</p>}
       {weather && (
