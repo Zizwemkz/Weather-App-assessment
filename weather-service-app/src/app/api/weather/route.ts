@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
     city
   )}&appid=${apiKey}`;
-  console.log(apiUrl);
+  console.log(apiUrl);  
   try {
     const res = await fetch(apiUrl);
     if (!res.ok) {
