@@ -1,23 +1,58 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
+# Node
+/node_modules/
+.pnp
 .pnp.js
 
-# testing
-/coverage
-
-# production
+# Next.js / build output
+/.next
+/out
+/.vercel
+/.vercel_build_output
 /build
+/dist
 
-# misc
-.DS_Store
+# Tooling caches
+/.cache
+/.parcel-cache
+/.turbo
+/.eslintcache
+/.cache/
+
+# Dependency lockfiles - keep these committed (do NOT ignore)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Environment variables (do NOT commit secrets)
+.env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*.local
 
+# Logs
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Testing
+/coverage
+/coverage/*
+.nyc_output
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Archives
+*.tgz
+*.zip
+
+# Misc
+.sass-cache
+/public/uploads

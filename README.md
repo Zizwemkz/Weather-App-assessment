@@ -10,6 +10,7 @@ It fetches current weather from **OpenWeatherMap** and demonstrates safe API key
 - Displays city, country, temperature, condition, description, and an icon
 - **Loading** indicator while fetching
 - **Robust error handling** (invalid city, network/API errors, rate limits)
+- API key secured via Next.js API route
   > **Note:** The default unit is **Celsius** (metric).
 
 ## Tech
