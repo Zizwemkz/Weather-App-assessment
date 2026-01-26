@@ -99,14 +99,26 @@ simple-weather-nextjs/
   - Vanilla CSS with a few utility classes; easy to extend with CSS Modules or Tailwind if desired.
 
 ---
+## Design decisions
+- Server-side proxy (app/api/weather/route.ts)
+  - Keeps the OpenWeather API key on the server so the key never appears in browser network requests or client bundles.
+  - The route validates input, calls OpenWeather with `units=metric` (so the API returns Celsius directly), normalizes the upstream response, and returns a compact, consistent JSON shape to the client.
+- Units & formatting
+  - Default unit is metric (Celsius) for clarity; the API call uses `units=metric` rather than manual Kelvin-to-Celsius conversion.
+  - Client uses Intl.NumberFormat for locale-aware number formatting when displaying temperature and wind speed.
+- Error handling
+  - Route maps upstream errors into consistent JSON { error: string } responses and sets appropriate HTTP statuses (400/500/504/etc).
+  - The client shows friendly error messages, supports request cancellation (so fast repeated searches won't produce race conditions), and displays a clear loading state.
 
-## Common Issues & Troubleshooting
+## How I tested this
 
-- **`Server is missing OPENWEATHER_API_KEY`**  
-  Make sure `.env.local` exists with your key and restart the dev server.
+- Unit tests
+  Due to time iu couldnt add unit tests.
 
-- **City not found**  
-  Check the city spelling. Try including country if ambiguous (e.g., "Paris,FR").
+- Manual testing (quick checklist)
+  - Start dev server and try several cities: click or enter Cities that you wish to see weatWeather Forecast "Cape Town", "Johannesburg", "London".
+  - Test network/failure scenarios: simulate offline, or temporarily revoke API key to ensure proper error messages.
+  - Verify environment variables are not exposed in client bundles.
 
-- **429 / Rate limited**  
-  Free OpenWeather plans may rate-limit. Wait a bit and retry.
+## Screenshots 
+![Demo](./design/homepage.png)</a>
