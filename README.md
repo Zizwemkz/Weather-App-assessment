@@ -121,4 +121,4 @@ simple-weather-nextjs/
   - Verify environment variables are not exposed in client bundles.
 
 ## Screenshots 
-![Demo](./design/homepage.png)</a>
+![Demo](./design/homePage.png)</a>
